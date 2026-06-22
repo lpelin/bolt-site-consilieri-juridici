@@ -32,8 +32,8 @@ function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-white/95 backdrop-blur-lg shadow-lg'
-          : 'bg-transparent'
+          ? 'bg-black/90 backdrop-blur-lg shadow-2xl shadow-black/20'
+          : 'bg-white/10 backdrop-blur-sm'
       }`}
     >
       <div className="container-custom">
@@ -45,14 +45,24 @@ function Navbar() {
             duration={500}
             className="flex items-center gap-3 cursor-pointer group"
           >
-            <div className="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
+            <div className={`w-12 h-12 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 ${
+              scrolled 
+                ? 'bg-gradient-to-br from-gray-800 to-gray-900' 
+                : 'bg-gradient-to-br from-primary-600 via-primary-500 to-primary-400'
+            }`}>
               <GiJusticeStar className="text-white text-2xl" />
             </div>
             <div className="hidden sm:block">
-              <h1 className="text-xl font-bold text-dark-800 font-serif">
+              <h1 className={`text-xl font-bold font-serif transition-colors duration-300 ${
+                scrolled ? 'text-white' : 'text-white'
+              }`}>
                 Consilieri Juridici
               </h1>
-              <p className="text-xs text-dark-500 -mt-1">Excelență în Drept</p>
+              <p className={`text-xs -mt-1 transition-colors duration-300 ${
+                scrolled ? 'text-gray-400' : 'text-white/70'
+              }`}>
+                Excelență în Drept
+              </p>
             </div>
           </Link>
 
@@ -65,8 +75,12 @@ function Navbar() {
                 smooth={true}
                 duration={500}
                 spy={true}
-                activeClass="text-primary-600 bg-primary-50"
-                className="px-4 py-2 text-sm font-medium text-dark-600 hover:text-primary-600 rounded-lg hover:bg-primary-50 transition-all duration-300 cursor-pointer"
+                activeClass={scrolled ? 'bg-white/10 text-white' : 'bg-white/20 text-white'}
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 cursor-pointer ${
+                  scrolled 
+                    ? 'text-gray-300 hover:text-white hover:bg-white/10' 
+                    : 'text-white/80 hover:text-white hover:bg-white/20'
+                }`}
               >
                 {link.name}
               </Link>
@@ -75,7 +89,11 @@ function Navbar() {
               to="contact"
               smooth={true}
               duration={500}
-              className="ml-4 btn-primary text-sm px-6 py-3"
+              className={`ml-4 text-sm px-6 py-3 font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl active:scale-[0.98] ${
+                scrolled
+                  ? 'bg-white text-black hover:bg-gray-100'
+                  : 'bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm'
+              }`}
             >
               Consultație Gratuită
             </Link>
@@ -84,13 +102,17 @@ function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-lg hover:bg-dark-50 transition-colors"
+            className={`lg:hidden relative w-10 h-10 flex items-center justify-center rounded-lg transition-colors ${
+              scrolled 
+                ? 'hover:bg-white/10' 
+                : 'hover:bg-white/20'
+            }`}
             aria-label={isOpen ? 'Închide meniul' : 'Deschide meniul'}
           >
             {isOpen ? (
-              <HiX className="text-2xl text-dark-800" />
+              <HiX className={`text-2xl ${scrolled ? 'text-white' : 'text-white'}`} />
             ) : (
-              <HiMenu className="text-2xl text-dark-800" />
+              <HiMenu className={`text-2xl ${scrolled ? 'text-white' : 'text-white'}`} />
             )}
           </button>
         </div>
@@ -101,7 +123,9 @@ function Navbar() {
             isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
           }`}
         >
-          <div className="py-4 space-y-1 border-t border-dark-100">
+          <div className={`py-4 space-y-1 border-t ${
+            scrolled ? 'border-white/10' : 'border-white/20'
+          }`}>
             {navLinks.map((link) => (
               <Link
                 key={link.to}
@@ -109,7 +133,11 @@ function Navbar() {
                 smooth={true}
                 duration={500}
                 onClick={handleLinkClick}
-                className="block px-4 py-3 text-base font-medium text-dark-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-all duration-300 cursor-pointer"
+                className={`block px-4 py-3 text-base font-medium rounded-lg transition-all duration-300 cursor-pointer ${
+                  scrolled 
+                    ? 'text-gray-300 hover:text-white hover:bg-white/10' 
+                    : 'text-white/80 hover:text-white hover:bg-white/20'
+                }`}
               >
                 {link.name}
               </Link>
@@ -119,7 +147,11 @@ function Navbar() {
               smooth={true}
               duration={500}
               onClick={handleLinkClick}
-              className="block mx-4 mt-4 btn-primary text-sm px-6 py-3 text-center"
+              className={`block mx-4 mt-4 text-sm px-6 py-3 text-center font-semibold rounded-xl transition-all duration-300 ${
+                scrolled
+                  ? 'bg-white text-black hover:bg-gray-100'
+                  : 'bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm'
+              }`}
             >
               Consultație Gratuită
             </Link>
